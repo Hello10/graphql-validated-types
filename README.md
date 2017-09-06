@@ -13,7 +13,7 @@ const HexColor = new GraphQLValidatedString({
 
 ## Usage
 
-### [GraphQLValidatedScalar](./blob/master/src/GraphQLValidatedScalar.js)
+### [GraphQLValidatedScalar](./src/GraphQLValidatedScalar.js)
 The base class other types extend. It is an extension of [GraphQLScalarType](https://github.com/graphql/graphql-js/blob/master/src/type/definition.js#L304) and can itself be instantiated as a custom scalar for use as a placeholder, allowing for later implementation of parsing, serialization, validation etc.
 ```js
 const MyPlaceholder = new GraphQLValidatedScalar({
@@ -22,7 +22,7 @@ const MyPlaceholder = new GraphQLValidatedScalar({
 });
 ```
 
-### [GraphQLValidatedString](./blob/master/src/GraphQLValidatedString.js)
+### [GraphQLValidatedString](./src/GraphQLValidatedString.js)
 
 #### Validation
 Validation functions will throw `TypeError` unless the value matches criteria
@@ -168,7 +168,7 @@ let Lower = new GraphQLValidatedString({
 Assert.equal(Upper.parseValue('ABCdef'), 'abcdef');
 ```
 
-### [GraphQLValidatedEmail](./blob/master/src/GraphQLValidatedEmail.js)
+### [GraphQLValidatedEmail](./src/GraphQLValidatedEmail.js)
 Extends `GraphQLValidatedString` and validates Email using [email-regex](https://github.com/sindresorhus/email-regex).
 ```
 // exact email address passes
@@ -178,7 +178,7 @@ const Email = new GraphQLValidatedEmail();
 const ContainsEmail = new GraphQLValidatedEmail().exact(false);
 ```
 
-### [GraphQLValidatedURL](./blob/master/src/GraphQLValidatedURL.js)
+### [GraphQLValidatedURL](./src/GraphQLValidatedURL.js)
 Extends `GraphQLValidatedString` and validates URL using [url-regex](https://github.com/kevva/url-regex).
 ```
 // exact URL with protocol passes
@@ -188,7 +188,7 @@ const URL = new GraphQLValidatedURL();
 const ContainsURL = new GraphQLValidatedURL().exact(false).strict(false);
 ```
 
-### [GraphQLValidatedPhoneNumber](./blob/master/src/GraphQLValidatedPhoneNumber.js)
+### [GraphQLValidatedPhoneNumber](./src/GraphQLValidatedPhoneNumber.js)
 Extends `GraphQLValidatedString` and validates Phone Number  using [phone-regex](https://github.com/regexhq/phone-regex)
 ```
 // exact phone number passes
@@ -198,7 +198,7 @@ const Phone = new GraphQLValidatedPhoneNumber();
 const ContainsPhone = new GraphQLValidatedPhoneNumber().exact(false);
 ```
 
-### [GraphQLValidatedIPAddress](./blob/master/src/GraphQLValidatedIPAddress.js)
+### [GraphQLValidatedIPAddress](./src/GraphQLValidatedIPAddress.js)
 Extends `GraphQLValidatedString` and validates IP Address using [ip-regex](https://github.com/sindresorhus/ip-regex).
 ```
 // validates string containing IP Address (either IPV4 or IPV6)
@@ -211,7 +211,7 @@ let IPV4Address = new GraphQLValidatedIPAddress().v4();
 let IPV6Address = new GraphQLValidatedIPAddress().v6();
 ```
 
-### [GraphQLValidatedNumber](./blob/master/src/GraphQLValidatedNumber.js)
+### [GraphQLValidatedNumber](./src/GraphQLValidatedNumber.js)
 
 #### `.min(minimum)`
 Require to be at least `minimum`
@@ -321,8 +321,8 @@ Assert.throws(()=> {
 }, /negative/);
 ```
 
-### [GraphQLValidatedInteger](./blob/master/src/GraphQLValidatedInteger.js)
-Extends [GraphQLValidatedNumber](./blob/master/src/GraphQLValidatedNumber.js) and requires number to be `32-bit` (between `-2147483648` and `2147483647`) and truncates from floats to integers
+### [GraphQLValidatedInteger](./src/GraphQLValidatedInteger.js)
+Extends `GraphQLValidatedNumber` and requires number to be `32-bit` (between `-2147483648` and `2147483647`) and truncates from floats to integers
 
 ```js
 const Integer = new GraphQLValidatedInteger({
@@ -332,7 +332,7 @@ const Integer = new GraphQLValidatedInteger({
 Assert.equal(Integer.parseValue(10.5), 10);
 ```
 
-### [GraphQLValidatedMoment](./blob/master/src/GraphQLValidatedMoment.js)
+### [GraphQLValidatedMoment](./src/GraphQLValidatedMoment.js)
 Parses and formats dates using [Moment.js](https://momentjs.com/)
 
 Prior to using, make sure `Moment` is set on the constructor
@@ -434,7 +434,7 @@ Assert.throws(()=> {
 }, /not after/);
 ```
 
-### [GraphQLValidatedObjectID](./blob/master/src/GraphQLValidatedObjectID.js)
+### [GraphQLValidatedObjectID](./src/GraphQLValidatedObjectID.js)
 Wrapper on MongoDB's [ObjectID](). Handles parsing 24 char hex string, 12 byte string, or existing ObjectID. Serializes using `.toHexString`
 
 Prior to using, make sure `ObjectID` is set on the constructor
