@@ -146,7 +146,7 @@ describe('GraphQLValidatedNumber', ()=> {
 
 		it('should default null', ()=> {
 			Assert.equal(SometimesTen.parseValue(null), DEFAULT);
-		})
+		});
 
 		it('should default undefined', ()=> {
 			Assert.equal(SometimesTen.parseValue(undefined), DEFAULT);
