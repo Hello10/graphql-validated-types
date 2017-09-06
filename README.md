@@ -1,5 +1,5 @@
 # graphql-validated-types
-A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api.
+A collection of [GraphQL custom scalars](http://dev.apollodata.com/tools/graphql-tools/scalars.html) supporting cleanup, validation, and defaults via fluent api.
 
 ## Example
 ### Hex colors
