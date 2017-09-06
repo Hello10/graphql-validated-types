@@ -1,4 +1,4 @@
-# graphql-validated
+# graphql-validated-types
 A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api.
 
 ## Example
