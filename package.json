@@ -1,6 +1,6 @@
 {
   "name": "graphql-validated-types",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {

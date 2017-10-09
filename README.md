@@ -14,12 +14,33 @@ const HexColor = new GraphQLValidatedString({
 ## Usage
 
 ### [GraphQLValidatedScalar](./src/GraphQLValidatedScalar.js)
-The base class other types extend. It is an extension of [GraphQLScalarType](https://github.com/graphql/graphql-js/blob/master/src/type/definition.js#L304) and can itself be instantiated as a custom scalar for use as a placeholder, allowing for later implementation of parsing, serialization, validation etc.
+The base class other types extend. It is an extension of [GraphQLScalarType](https://github.com/graphql/graphql-js/blob/master/src/type/definition.js#L304) and can itself be instantiated as a custom scalar for use as a placeholder or to attach custom validators. Validators should either throw an error on invalid input, or return the the value (perhaps transformed) when it is valid. They can be chained as below and are run in the order they are added.
 ```js
-const MyPlaceholder = new GraphQLValidatedScalar({
-	name: 'MyPlaceholder',
-	description: 'Custom scalar MyPlacholder'
+const VowelCountButNoLetterE = new GraphQLValidatedScalar({
+	name: 'VowelCountButNoLetterE'
+}).validator((value)=> {
+	if (value.match(/e/)) {
+		throw new Error('E is not allowed');
+	}
+	return value;
+}).validator((value)=> {
+	let vowels = ['a', 'e', 'i', 'o', 'u'];
+	let count = 0;
+	for (let i = 0; i < value.length; i++) {
+		let letter = value[i];
+		if (vowels.indexOf(letter) !== -1) {
+			count++;
+		}
+	}
+	return count;
 });
+
+let count = VowelCountButNoLetterE.parseValue('animals');
+Assert.equal(count, 3);
+
+Assert.throws(()=> {
+	VowelCountButNoLetterE.parseValue('forever');
+}, /E is not allowed/);
 ```
 
 ### [GraphQLValidatedString](./src/GraphQLValidatedString.js)
