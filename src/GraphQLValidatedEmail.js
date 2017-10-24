@@ -20,7 +20,7 @@ class GraphQLValidatedEmail extends GraphQLValidatedString {
 		return this.regex(email_regex);
 	}
 
-	exact (exact) {
+	exact (exact = true) {
 		this._exact = exact;
 		return this.setRegex();
 	}

@@ -20,7 +20,7 @@ class GraphQLValidatedPhoneNumber extends GraphQLValidatedString {
 		return this.regex(phone_regex);
 	}
 
-	exact (exact) {
+	exact (exact = true) {
 		this._exact = exact;
 		return this.setRegex();
 	}

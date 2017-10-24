@@ -25,7 +25,7 @@ class GraphQLValidatedIPAddress extends GraphQLValidatedString {
 		return this.regex(ip_regex);
 	}
 
-	exact (exact) {
+	exact (exact = true) {
 		this._exact = exact;
 		return this.setRegex();
 	}
