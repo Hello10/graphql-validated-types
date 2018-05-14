@@ -2,30 +2,37 @@ const typeDefs = `
   scalar Time
   scalar Email
   scalar Username
+  scalar UUID
 
   type Author {
-    id: ID!
+    id: UUID!
     username: Username!
     email: Email!
-    posts: [Post]
+    createdAt: Time!
+    # REFS
+    posts: [Post!]!
   }
 
   type Post {
-    id: ID!
+    id: UUID!
     title: String!
     body: String!
+    authorId: UUID!
+    createdAt: Time!
+    # REFS
     author: Author!
-    createdAt: Time
   }
 
   type Query {
     posts: [Post]
+    post(id: UUID!): Post
     authors: [Author]
+    author(id: UUID!): Author
   }
 
   type Mutation {
     createAuthor (username: Username!, email: Email!): Author
-    createPost (title: String!, body: String!, authorId: ID!): Post
+    createPost (title: String!, body: String!, authorId: UUID!): Post
   }
 
   schema {

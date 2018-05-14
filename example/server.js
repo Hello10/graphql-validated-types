@@ -6,11 +6,28 @@ const expressPlayground =require('graphql-playground-middleware-express').defaul
 
 const typeDefs =require('./typeDefs');
 const resolvers =require('./resolvers');
+const loadFakeData = require('./loadFakeData');
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
+
+const {
+  FAKE_AUTHORS,
+  FAKE_POSTS
+} = loadFakeData();
+
+function printCollection ({name, list}) {
+  let ids = list.map(({id})=> id).join(', ');
+  console.log(`${name}: ${ids}`);
+  console.log(JSON.stringify(list, null, 1));
+}
+
+console.log('Created fake data');
+printCollection({name: 'Authors', list: FAKE_AUTHORS});
+console.log();
+printCollection({name: 'Posts', list: FAKE_POSTS});
 
 const {PORT} = process.env;
 
