@@ -11,6 +11,14 @@ const HexColor = new GraphQLValidatedString({
 }).toUpperCase().hex().length(6).default('000000');
 ```
 
+### Example Project
+There's an example of using this library with express in `/example`. You can run locally by doing
+```
+git clone https://github.com/stephenhandley/graphql-validated-types
+cd graphql-validated-types
+npm run example
+```
+
 ## Usage
 
 ### [GraphQLValidatedScalar](./src/GraphQLValidatedScalar.js)

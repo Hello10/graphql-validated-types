@@ -4,7 +4,8 @@
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
-    "test": "$(npm bin)/mocha --ui bdd './src/**/*.test.js'"
+    "test": "$(npm bin)/mocha --ui bdd './src/**/*.test.js'",
+    "example": "npm install && cd example && npm install && npm start"
   },
   "author": "Stephen Handley",
   "license": "MIT",
