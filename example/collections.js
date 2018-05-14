@@ -19,10 +19,15 @@ class Collection {
       return this.items;
     }
     return this.items.filter((item)=> {
-      return Object.entries(item).every(([attr, value])=> {
+      return Object.entries(query).every(([attr, value])=> {
         return (item[attr] === value);
       });
     });
+  }
+
+  findOne (query) {
+    let result = this.find(query);
+    return (result.length) ? result[0] : null;
   }
 }
 

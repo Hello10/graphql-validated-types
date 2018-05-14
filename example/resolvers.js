@@ -38,13 +38,13 @@ const resolvers = {
       return Post.find();
     },
     post (_, {id}) {
-      return Post.find({id});
+      return Post.findOne({id});
     },
     authors () {
       return Author.find();
     },
     author (_, {id}) {
-      return Author.find({id});
+      return Author.findOne({id});
     }
   },
   Mutation: {
@@ -61,9 +61,8 @@ const resolvers = {
     },
   },
   Post: {
-    author(post) {
-      let result = Author.find({ id: post.authorId });
-      return (result.length) ? result[0] : null;
+    author (post) {
+      return Author.findOne({ id: post.authorId });
     },
   },
   ...ScalarResolvers

@@ -19,10 +19,10 @@ module.exports = function loadFakeData () {
     }
   ].map(Author.create.bind(Author));
 
-  const FAKE_POSTS = FAKE_AUTHORS.map(({id})=> {
+  const FAKE_POSTS = FAKE_AUTHORS.map(({id, username})=> {
     return Post.create({
       authorId: id,
-      title: 'ZOMG This Is My First Post',
+      title: `First post by ${username}`,
       body: 'My brother Dennis is such a turd'
     });
   });
