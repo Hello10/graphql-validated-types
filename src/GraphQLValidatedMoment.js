@@ -11,7 +11,7 @@ class GraphQLValidatedMoment extends GraphQLValidatedScalar {
 			let Moment = this.Moment;
 			let moment = Moment(value, this.input_format);
 			if (!moment.isValid()) {
-				throw new TypeError(`${this.name} is not a valid moment`);
+				throw new TypeError(`${this.name} is not valid format`);
 			}
 			return moment;
 		});

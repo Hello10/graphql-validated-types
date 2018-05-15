@@ -50,7 +50,7 @@ describe('GraphQLValidatedMoment', ()=> {
 				const bad_time = '10/20/2010 4:30 +0000';
 				Assert.throws(()=> {
 					Time.parseValue(bad_time);
-				}, /Time is not a valid moment/);
+				}, /Time is not valid format/);
 
 			});
 
@@ -59,7 +59,7 @@ describe('GraphQLValidatedMoment', ()=> {
 				Time.inputFormat('YYYY');
 				Assert.throws(()=> {
 					Time.parseValue(time);
-				}, /Time is not a valid moment/);
+				}, /Time is not valid format/);
 			});
 		});
 
