@@ -36,29 +36,28 @@ describe('GraphQLValidatedMoment', ()=> {
 		});
 
 		describe('.input_format', ()=> {
-			const format = 'YYYY-MM-DD HH:mm Z';
+			beforeEach(()=> {
+				const format = 'YYYY-MM-DD HH:mm Z';
+				Time.inputFormat(format);
+			});
 
 			it('should handle parsing', ()=> {
-				Time.inputFormat(format);
-				const time = '2010-10-20 4:30 +0000';
-				const parsed = Time.parseValue(time).format();
+				const good_time = '2010-10-20 4:30 +0000';
+				const parsed = Time.parseValue(good_time).format();
 				Assert.equal(parsed, '2010-10-19T21:30:00-07:00');
 			});
 
 			it('should throw when input_format is not matched', ()=> {
-				Time.inputFormat(format);
-				const bad_time = '10/20/2010 4:30 +0000';
+				const bad_format_time = '10/20/2010 4:30 +0000';
 				Assert.throws(()=> {
-					Time.parseValue(bad_time);
+					Time.parseValue(bad_format_time);
 				}, /Time is not valid format/);
-
 			});
 
 			it('should fail to parse invalid date', ()=> {
-				const time = 'honkhonk';
-				Time.inputFormat('YYYY');
+				const bad_time = 'honkhonk';
 				Assert.throws(()=> {
-					Time.parseValue(time);
+					Time.parseValue(bad_time);
 				}, /Time is not valid format/);
 			});
 		});
