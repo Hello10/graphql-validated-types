@@ -1,5 +1,5 @@
 const typeDefs = `
-  scalar Time
+  scalar CreateTime
   scalar Email
   scalar Username
   scalar UUID
@@ -8,7 +8,7 @@ const typeDefs = `
     id: UUID!
     username: Username!
     email: Email!
-    createdAt: Time!
+    createdAt: CreateTime!
     # REFS
     posts: [Post!]!
   }
@@ -18,7 +18,7 @@ const typeDefs = `
     title: String!
     body: String!
     authorId: UUID!
-    createdAt: Time!
+    createdAt: CreateTime!
     # REFS
     author: Author!
   }

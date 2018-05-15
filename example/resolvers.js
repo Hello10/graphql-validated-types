@@ -11,9 +11,11 @@ GraphQLValidatedMoment.Moment = Moment;
 
 const Email = new GraphQLValidatedEmail();
 
-const Time = new GraphQLValidatedMoment({
-	name: 'Time'
-});
+const CreateTime = new GraphQLValidatedMoment({
+	name: 'CreateTime'
+})
+  .beforeNow()
+  .outputFormat('YYYY/MM/DD HH:mm Z');
 
 const Username = new GraphQLValidatedString({
 	name: 'Username'
@@ -27,7 +29,7 @@ const UUID = new GraphQLValidatedString({
 
 const ScalarResolvers = {
   Email,
-  Time,
+  CreateTime,
   Username,
   UUID
 };
