@@ -39,9 +39,20 @@ class GraphQLValidatedMoment extends GraphQLValidatedScalar {
 		return this;
 	}
 
+	// parse value as string instead of moment object to store in database
+	parseValue(value) {
+		return this.validate(value).format();
+	}
+	
+	// parse value as string instead of moment object to store in database
+	parseLiteral(ast) {
+		return this.validate(ast.value).format();
+	}
+
 	// overriding base implementation
 	serialize (moment) {
-		return moment.format(this.output_format);
+		// return moment.format(this.output_format);
+		return this.Moment(moment).format(this.output_format)
 	}
 
 	before (before) {
