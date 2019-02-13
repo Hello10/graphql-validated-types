@@ -15,7 +15,7 @@ class GraphQLValidatedString extends GraphQLValidatedScalar {
 		});
   }
 
-  existsIn(arr) {
+  existsIn (arr) {
     return this.validator((str)=> {
       const result = arr.find((el)=> {
         return el === str;

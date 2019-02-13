@@ -25,25 +25,25 @@ describe('GraphQLValidatedString', ()=> {
 	});
 
   describe('.existsIn(arr)', ()=> {
-    let Herp;
+    let Flerp;
 
     beforeEach(()=> {
-      Herp = new GraphQLValidatedString({
-        name: 'Herp'
+      Flerp = new GraphQLValidatedString({
+        name: 'Flerp'
       }).existsIn(['Herp', 'Derp']);
     });
 
-    it('should fine a value from the array', ()=> {
-      Assert.equal(Herp.parseValue('Derp'), 'Derp');
-      Assert.equal(Herp.parseValue('Herp'), 'Herp');
+    it('should find a value from the array', ()=> {
+      Assert.equal(Flerp.parseValue('Derp'), 'Derp');
+      Assert.equal(Flerp.parseValue('Herp'), 'Herp');
     });
 
     it('should throw on a value not in the array', ()=> {
 			Assert.throws(()=> {
-				Herp.parseValue('qwerp');
+				Flerp.parseValue('qwerp');
 			}, /'qwerp' was not present in array/);
     });
-  })
+  });
 
 	describe('.length(length)', ()=> {
 		let Barfed;

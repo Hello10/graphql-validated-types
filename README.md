@@ -136,6 +136,18 @@ Assert.throws(()=> {
 }, /does not match/);
 ```
 
+##### `.existsIn(arr)`
+Requires value to exist in `arr`
+```js
+const Domain = new GraphQLValidatedString({
+	name: 'Domain'
+}).existsIn(['foo.com', 'bar.com']);
+
+Assert.throws(()=> {
+	Domain.parseValue('baz.com');
+}, /not present in array/);
+```
+
 #### Cleanup
 ##### `.trim()`
 Remove spaces from either side of string
