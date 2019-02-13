@@ -1,6 +1,6 @@
 {
   "name": "graphql-validated-types",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,9 @@
     "ip-regex": "2.1.0",
     "phone-regex": "2.0.0",
     "url-regex": "4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenhandley/graphql-validated-types.git"
   }
 }
