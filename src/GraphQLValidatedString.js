@@ -15,6 +15,19 @@ class GraphQLValidatedString extends GraphQLValidatedScalar {
 		});
   }
 
+  existsIn(arr) {
+    return this.validator((str)=> {
+      const result = arr.find((el)=> {
+        return el === str;
+      });
+      if (result) {
+        return str;
+      } else {
+        throw new TypeError(`'${str}' was not present in array`);
+      }
+    });
+  }
+
 	length (length) {
 		return this.validator((str)=> {
 			let valid;
