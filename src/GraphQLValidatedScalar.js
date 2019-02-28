@@ -6,13 +6,13 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 			name,
 			description,
 			serialize: (value)=> {
-				return this.serialize(value);
+				return this._serialize(value);
 			},
 			parseValue: (value)=> {
-				return this.parseValue(value);
+				return this._parseValue(value);
 			},
 			parseLiteral: (ast)=> {
-				return this.parseLiteral(ast);
+				return this._parseLiteral(ast);
 			}
 		});
 		this._default = null;
@@ -23,15 +23,15 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 		this.validators = [];
 	}
 
-	serialize (value) {
+	_serialize (value) {
 		return value;
 	}
 
-	parseValue (value) {
+	_parseValue (value) {
 		return this.validate(value);
 	}
 
-	parseLiteral (ast) {
+	_parseLiteral (ast) {
 		return this.validate(ast.value);
 	}
 

@@ -40,7 +40,7 @@ class GraphQLValidatedMoment extends GraphQLValidatedScalar {
 	}
 
 	// overriding base implementation
-	serialize (moment) {
+	_serialize (moment) {
 		const Moment = this.Moment;
 		if (!Moment.isMoment(moment)) {
 			moment = Moment(moment);

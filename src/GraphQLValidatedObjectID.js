@@ -26,7 +26,7 @@ class GraphQLValidatedObjectID extends GraphQLValidatedScalar {
 	}
 
 	// overriding base implementation
-	serialize (value) {
+	_serialize (value) {
 		return value.toHexString();
 	}
 }
