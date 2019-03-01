@@ -31,21 +31,7 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 		return null;
 	}
 
-	_serialize (value) {
-		return value;
-	}
-
-	throwTypeError () {
-		const types = this.validTypes();
-		let description = 'invalid type';
-		if (types) {
-			description = `not one of [${types}]`
-		}
-		throw new TypeError(`${this.name} is ${description}`);
-	}
-
-	_parseValue (value) {
-		value = this.ensureDefault(value);
+	_ensureValidType (value) {
 		const types = this.validTypes();
 		if (types) {
 			const type = typeof value;
@@ -53,7 +39,16 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 				this.throwTypeError();
 			}
 		}
+	}
 
+	_serialize (value) {
+		this._ensureValidType(value);
+		return this.validate(value);
+	}
+
+	_parseValue (value) {
+		value = this.ensureDefault(value);
+		this._ensureValidType(value);
 		return this.validate(value);
 	}
 
@@ -70,6 +65,15 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 		}
 
 		return this.validate(value);
+	}
+
+	throwTypeError () {
+		const types = this.validTypes();
+		let description = 'has invalid type';
+		if (types) {
+			description = `is not ${types.join(' or ')}`
+		}
+		throw new TypeError(`${this.name} ${description}`);
 	}
 
 	ensureDefault (value) {
@@ -89,7 +93,7 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 	}
 
 	validate (value) {
-  	return this.validators.reduce((result, validator) => {
+  	return this.validators.reduce((result, validator)=> {
 			return validator(result);
 		}, value);
 	}

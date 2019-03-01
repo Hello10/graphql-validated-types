@@ -35,6 +35,7 @@ class GraphQLValidatedObjectID extends GraphQLValidatedScalar {
 
 	// overriding base implementation
 	_serialize (value) {
+		this._ensureValidType(value);
 		return value.toHexString();
 	}
 }
