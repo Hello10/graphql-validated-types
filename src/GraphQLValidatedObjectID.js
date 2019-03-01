@@ -25,6 +25,14 @@ class GraphQLValidatedObjectID extends GraphQLValidatedScalar {
 		this._ObjectID = ObjectID;
 	}
 
+	validKinds () {
+		return [Kind.OBJECT, Kind.STRING];
+	}
+
+	validTypes () {
+		return ['object', 'string'];
+	}
+
 	// overriding base implementation
 	_serialize (value) {
 		return value.toHexString();

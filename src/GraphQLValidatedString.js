@@ -1,6 +1,14 @@
 const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedString extends GraphQLValidatedScalar {
+	validKinds () {
+		return [Kind.STRING];
+	}
+
+	validTypes () {
+		return ['string'];
+	}
+
 	regex (pattern) {
 		if (!(pattern instanceof RegExp)) {
 			pattern = new RegExp(pattern);

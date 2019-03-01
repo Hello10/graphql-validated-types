@@ -3,13 +3,15 @@ const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 class GraphQLValidatedNumber extends GraphQLValidatedScalar {
 	constructor (args) {
 		super(args);
-		this.validator((value)=> {
-			if (value === '') {
-				throw new TypeError(`${this.name} is empty string`);
-			}
-			return value;
-		});
 		this.validator(Number);
+	}
+
+	validKinds () {
+		return [Kind.INT, Kind.FLOAT];
+	}
+
+	validTypes () {
+		return ['number'];
 	}
 
 	shouldDefault (value) {

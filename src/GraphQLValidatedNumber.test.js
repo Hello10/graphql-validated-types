@@ -16,7 +16,7 @@ describe('GraphQLValidatedNumber', ()=> {
 
 		Assert.throws(()=> {
 			Number.parseValue(input);
-		}, /is empty string/);
+		}, /is not one of \[number\]/);
 	});
 
 	it('should support min value', ()=> {

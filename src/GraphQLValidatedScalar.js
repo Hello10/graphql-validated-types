@@ -23,16 +23,60 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 		this.validators = [];
 	}
 
+	validKinds () {
+		return null;
+	}
+
+	validTypes () {
+		return null;
+	}
+
 	_serialize (value) {
 		return value;
 	}
 
+	throwTypeError () {
+		const types = this.validTypes();
+		let description = 'invalid type';
+		if (types) {
+			description = `not one of [${types}]`
+		}
+		throw new TypeError(`${this.name} is ${description}`);
+	}
+
 	_parseValue (value) {
+		value = this.ensureDefault(value);
+		const types = this.validTypes();
+		if (types) {
+			const type = typeof value;
+			if (!types.includes(type)) {
+				this.throwTypeError();
+			}
+		}
+
 		return this.validate(value);
 	}
 
 	_parseLiteral (ast) {
-		return this.validate(ast.value);
+		value = this.ensureDefault(value);
+		const {kind, value} = ast;
+
+		const kinds = this.validKinds();
+		if (kinds) {
+			const types = this.validTypes();
+			if (!kinds.includes(kind)) {
+				this.throwTypeError();
+			}
+		}
+
+		return this.validate(value);
+	}
+
+	ensureDefault (value) {
+		if (this.shouldDefault(value) && this._default) {
+			value = this._default;
+		}
+		return value;
 	}
 
 	shouldDefault (value) {
@@ -45,9 +89,6 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
 	}
 
 	validate (value) {
-		if (this.shouldDefault(value) && this._default) {
-			value = this._default;
-		}
   	return this.validators.reduce((result, validator) => {
 			return validator(result);
 		}, value);

@@ -13,6 +13,14 @@ class GraphQLValidatedInteger extends GraphQLValidatedNumber {
 		this.max(MAXIMUM);
 		this.min(MINIMUM);
 	}
+
+	validKinds () {
+		return [Kind.INT];
+	}
+
+	validTypes () {
+		return ['number'];
+	}
 }
 
 GraphQLValidatedInteger.MAXIMUM = MAXIMUM;

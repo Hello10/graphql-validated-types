@@ -17,6 +17,14 @@ class GraphQLValidatedMoment extends GraphQLValidatedScalar {
 		});
 	}
 
+	validKinds () {
+		return [Kind.STRING, Kind.OBJECT, Kind.INT];
+	}
+
+	validTypes () {
+		return ['object', 'string', 'number'];
+	}
+
 	get Moment () {
 		let Moment = this.constructor._Moment;
 		if (!Moment) {
