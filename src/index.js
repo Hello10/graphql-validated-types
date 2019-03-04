@@ -8,5 +8,6 @@ module.exports = {
 	GraphQLValidatedPhoneNumber: require('./GraphQLValidatedPhoneNumber'),
 	GraphQLValidatedScalar: require('./GraphQLValidatedScalar'),
 	GraphQLValidatedString: require('./GraphQLValidatedString'),
-	GraphQLValidatedURL: require('./GraphQLValidatedURL')
+	GraphQLValidatedURL: require('./GraphQLValidatedURL'),
+	GraphQLValidatedUsername: require('./GraphQLValidatedUsername')
 };
