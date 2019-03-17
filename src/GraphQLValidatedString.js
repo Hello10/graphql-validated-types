@@ -1,6 +1,14 @@
 const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedString extends GraphQLValidatedScalar {
+	constructor (args = {}) {
+		if (!args.name) {
+			args.name = 'String';
+		}
+		super(args);
+		this.validator(String);
+	}
+
 	validKinds () {
 		return [Kind.STRING];
 	}

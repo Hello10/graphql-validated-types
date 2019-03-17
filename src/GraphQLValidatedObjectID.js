@@ -5,7 +5,6 @@ class GraphQLValidatedObjectID extends GraphQLValidatedScalar {
 		if (!args.name) {
 			args.name = 'ObjectID'
 		}
-
 		super(args);
 
 		this.validator((value)=> {

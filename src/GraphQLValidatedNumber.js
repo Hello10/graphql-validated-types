@@ -2,6 +2,9 @@ const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedNumber extends GraphQLValidatedScalar {
 	constructor (args = {}) {
+		if (!args.name) {
+			args.name = 'Number';
+		}
 		super(args);
 		this.validator(Number);
 	}

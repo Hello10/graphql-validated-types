@@ -2,6 +2,9 @@ const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedMoment extends GraphQLValidatedScalar {
 	constructor (args = {}) {
+		if (!args.name) {
+			args.name = 'Moment';
+		}
 		super(args);
 
 		this.input_format = null;

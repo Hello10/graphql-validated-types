@@ -5,6 +5,9 @@ const MINIMUM = -2147483648;
 
 class GraphQLValidatedInteger extends GraphQLValidatedNumber {
 	constructor (args = {}) {
+		if (!args.name) {
+			args.name = 'Integer';
+		}
 		super(args);
 		this.validator((value)=> {
 			let truncate = (value >= 0) ? Math.floor : Math.ceil;

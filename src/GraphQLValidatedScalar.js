@@ -2,6 +2,9 @@ const { GraphQLScalarType } = require('graphql');
 
 class GraphQLValidatedScalar extends GraphQLScalarType {
 	constructor({name, description = 'custom scalar type'}) {
+		if (!name) {
+			name = 'Scalar';
+		}
 		super({
 			name,
 			description,
