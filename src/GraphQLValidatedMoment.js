@@ -1,7 +1,7 @@
 const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedMoment extends GraphQLValidatedScalar {
-	constructor (args) {
+	constructor (args = {}) {
 		super(args);
 
 		this.input_format = null;
