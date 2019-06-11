@@ -267,7 +267,7 @@ Assert.throws(()=> {
 ```
 
 #### `.max(maximum)`
-Require to be at least `maximum`
+Require to be smaller than `maximum`
 ```js
 let Count = new GraphQLValidatedNumber({
 	name: 'Count'
