@@ -1,6 +1,6 @@
 {
   "name": "graphql-validated-types",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
@@ -10,17 +10,17 @@
   "author": "Stephen Handley",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "6.0.2",
+    "mocha": "6.1.4",
     "moment": "2.24.0",
-    "mongodb": "3.1.13"
+    "mongodb": "3.2.7"
   },
   "dependencies": {
-    "email-regex": "3.0.0",
-    "graphql": "14.1.1",
-    "ip-regex": "4.0.0",
+    "email-regex": "4.0.0",
+    "graphql": "14.4.2",
+    "ip-regex": "4.1.0",
     "phone-regex": "2.1.0",
     "regex-username": "2.0.0",
-    "url-regex": "4.1.1"
+    "url-regex": "5.0.0"
   },
   "repository": {
     "type": "git",
