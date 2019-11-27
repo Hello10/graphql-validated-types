@@ -373,6 +373,9 @@ const Integer = new GraphQLValidatedInteger({
 Assert.equal(Integer.parseValue(10.5), 10);
 ```
 
+### [GraphQLValidatedDate](./src/GraphQLValidateDate.js)
+Parses native JS Dates
+
 ### [GraphQLValidatedMoment](./src/GraphQLValidatedMoment.js)
 Parses and formats dates using [Moment.js](https://momentjs.com/)
 
@@ -499,6 +502,9 @@ oid = ObjectID.parseValue(OBJECT_ID_12_BYTE);
 Assert.equal(oid.toHexString(), OBJECT_ID_12_BYTE_AS_HEX);
 Assert.equal(ObjectID.serialize(oid), OBJECT_ID_12_BYTE_AS_HEX);
 ```
+
+### [GraphQLValidatedSemver](./src/GraphQLValidateSemver.js)
+Parses [semver](https://semver.org/) i.e. `1.0.4`
 
 ## TODO
 - support for array and object type validation?

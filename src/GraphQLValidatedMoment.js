@@ -1,3 +1,5 @@
+const { Kind } = require('graphql/language');
+
 const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedMoment extends GraphQLValidatedScalar {

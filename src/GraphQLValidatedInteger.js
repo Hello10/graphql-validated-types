@@ -1,29 +1,31 @@
-const GraphQLValidatedNumber = require('./GraphQLValidatedNumber');
+const { Kind } = require("graphql/language");
+
+const GraphQLValidatedNumber = require("./GraphQLValidatedNumber");
 
 const MAXIMUM = 2147483647;
 const MINIMUM = -2147483648;
 
 class GraphQLValidatedInteger extends GraphQLValidatedNumber {
-	constructor (args = {}) {
-		if (!args.name) {
-			args.name = 'Integer';
-		}
-		super(args);
-		this.validator((value)=> {
-			let truncate = (value >= 0) ? Math.floor : Math.ceil;
-			return truncate(value);
-		});
-		this.max(MAXIMUM);
-		this.min(MINIMUM);
-	}
+  constructor(args = {}) {
+    if (!args.name) {
+      args.name = "Integer";
+    }
+    super(args);
+    this.validator(value => {
+      let truncate = value >= 0 ? Math.floor : Math.ceil;
+      return truncate(value);
+    });
+    this.max(MAXIMUM);
+    this.min(MINIMUM);
+  }
 
-	validKinds () {
-		return [Kind.INT];
-	}
+  validKinds() {
+    return [Kind.INT];
+  }
 
-	validTypes () {
-		return ['number'];
-	}
+  validTypes() {
+    return ["number"];
+  }
 }
 
 GraphQLValidatedInteger.MAXIMUM = MAXIMUM;
