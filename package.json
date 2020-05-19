@@ -1,18 +1,30 @@
 {
   "name": "graphql-validated-types",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
-    "test": "$(npm bin)/mocha --ui bdd './src/**/*.test.js'",
-    "example": "npm install && cd example && npm install && npm start"
+    "example": "yarn && cd example && yarn && yarn start",
+    "lint": "eslint ./src",
+    "test": "yarn nyc mocha --ui bdd './src/**/*.test.js'"
   },
-  "author": "Stephen Handley",
+  "author": {
+    "name": "Stephen Handley",
+    "email": "stephen@hello10.com",
+    "url": "https://hello10.com"
+  },
   "license": "MIT",
   "devDependencies": {
-    "mocha": "6.1.4",
+    "@hello10/eslint-config": "1.0.2",
+    "babel-eslint": "10.1.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-promise": "4.2.1",
+    "mocha": "7.1.2",
     "moment": "2.24.0",
-    "mongodb": "3.2.7"
+    "mongodb": "3.2.7",
+    "nyc": "15.0.1"
   },
   "dependencies": {
     "email-regex": "4.0.0",
@@ -25,6 +37,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/stephenhandley/graphql-validated-types.git"
+    "url": "git://github.com/hello10/graphql-validated-types.git"
   }
 }

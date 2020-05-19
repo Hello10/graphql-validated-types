@@ -1,20 +1,20 @@
-const { GraphQLScalarType } = require("graphql");
+const {GraphQLScalarType} = require('graphql');
 
 class GraphQLValidatedScalar extends GraphQLScalarType {
-  constructor({ name, description = "custom scalar type" }) {
+  constructor ({name, description = 'custom scalar type'}) {
     if (!name) {
-      name = "Scalar";
+      name = 'Scalar';
     }
     super({
       name,
       description,
-      serialize: value => {
+      serialize: (value)=> {
         return this._serialize(value);
       },
-      parseValue: value => {
+      parseValue: (value)=> {
         return this._parseValue(value);
       },
-      parseLiteral: ast => {
+      parseLiteral: (ast)=> {
         return this._parseLiteral(ast);
       }
     });
@@ -22,19 +22,19 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
     this.clearValidators();
   }
 
-  clearValidators() {
+  clearValidators () {
     this.validators = [];
   }
 
-  validKinds() {
+  validKinds () {
     return null;
   }
 
-  validTypes() {
+  validTypes () {
     return null;
   }
 
-  _ensureValidType(value) {
+  _ensureValidType (value) {
     const types = this.validTypes();
     if (types) {
       const type = typeof value;
@@ -44,20 +44,20 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
     }
   }
 
-  _serialize(value) {
+  _serialize (value) {
     this._ensureValidType(value);
     return this.validate(value);
   }
 
-  _parseValue(value) {
+  _parseValue (value) {
     value = this.ensureDefault(value);
     this._ensureValidType(value);
     return this.validate(value);
   }
 
-  _parseLiteral(ast) {
-    value = this.ensureDefault(value);
-    const { kind, value } = ast;
+  _parseLiteral (ast) {
+    const {kind} = ast;
+    const value = this.ensureDefault(ast.value);
 
     const kinds = this.validKinds();
     if (kinds) {
@@ -69,39 +69,39 @@ class GraphQLValidatedScalar extends GraphQLScalarType {
     return this.validate(value);
   }
 
-  throwTypeError() {
+  throwTypeError () {
     const types = this.validTypes();
-    let description = "has invalid type";
+    let description = 'has invalid type';
     if (types) {
-      description = `is not ${types.join(" or ")}`;
+      description = `is not ${types.join(' or ')}`;
     }
     throw new TypeError(`${this.name} ${description}`);
   }
 
-  ensureDefault(value) {
+  ensureDefault (value) {
     if (this.shouldDefault(value) && this._default) {
       value = this._default;
     }
     return value;
   }
 
-  shouldDefault(value) {
+  shouldDefault (value) {
     return !value;
   }
 
-  default(_default) {
+  default (_default) {
     this._default = _default;
     return this;
   }
 
-  validate(value) {
-    return this.validators.reduce((result, validator) => {
+  validate (value) {
+    return this.validators.reduce((result, validator)=> {
       return validator(result);
     }, value);
   }
 
-  validator(validator) {
-    let new_validators = Array.isArray(validator) ? validator : [validator];
+  validator (validator) {
+    const new_validators = Array.isArray(validator) ? validator : [validator];
     this.validators = [...this.validators, ...new_validators];
     return this;
   }

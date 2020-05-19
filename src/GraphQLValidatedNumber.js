@@ -1,30 +1,30 @@
-const { Kind } = require("graphql/language");
+const {Kind} = require('graphql/language');
 
-const GraphQLValidatedScalar = require("./GraphQLValidatedScalar");
+const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedNumber extends GraphQLValidatedScalar {
-  constructor(args = {}) {
+  constructor (args = {}) {
     if (!args.name) {
-      args.name = "Number";
+      args.name = 'Number';
     }
     super(args);
     this.validator(Number);
   }
 
-  validKinds() {
+  validKinds () {
     return [Kind.INT, Kind.FLOAT];
   }
 
-  validTypes() {
-    return ["number"];
+  validTypes () {
+    return ['number'];
   }
 
-  shouldDefault(value) {
+  shouldDefault (value) {
     return super.shouldDefault(value) && value !== 0;
   }
 
-  limit({ valid, description }) {
-    return this.validator(num => {
+  limit ({valid, description}) {
+    return this.validator((num)=> {
       if (!valid(num)) {
         throw new TypeError(`${this.name} is ${description}`);
       }
@@ -32,82 +32,82 @@ class GraphQLValidatedNumber extends GraphQLValidatedScalar {
     });
   }
 
-  min(min) {
+  min (min) {
     return this.limit({
-      description: "below minimum value",
-      valid: num => {
+      description: 'below minimum value',
+      valid: (num)=> {
         return num >= min;
       }
     });
   }
 
-  max(max) {
+  max (max) {
     return this.limit({
-      description: "above maximum value",
-      valid: num => {
+      description: 'above maximum value',
+      valid: (num)=> {
         return num <= max;
       }
     });
   }
 
-  range([min, max]) {
+  range ([min, max]) {
     return this.limit({
-      description: "not within range",
-      valid: num => {
+      description: 'not within range',
+      valid: (num)=> {
         return num >= min && num <= max;
       }
     });
   }
 
-  below(limit) {
+  below (limit) {
     return this.limit({
-      description: "not below limit",
-      valid: num => {
+      description: 'not below limit',
+      valid: (num)=> {
         return num < limit;
       }
     });
   }
 
-  above(limit) {
+  above (limit) {
     return this.limit({
-      description: "not above limit",
-      valid: num => {
+      description: 'not above limit',
+      valid: (num)=> {
         return num > limit;
       }
     });
   }
 
-  between([low, high]) {
+  between ([low, high]) {
     return this.limit({
-      description: "not between limits",
-      valid: num => {
+      description: 'not between limits',
+      valid: (num)=> {
         return num > low && num < high;
       }
     });
   }
 
-  positive() {
+  positive () {
     return this.limit({
-      description: "not positive",
-      valid: num => {
+      description: 'not positive',
+      valid: (num)=> {
         return num > 0;
       }
     });
   }
 
-  negative() {
+  negative () {
     return this.limit({
-      description: "not negative",
-      valid: num => {
+      description: 'not negative',
+      valid: (num)=> {
         return num < 0;
       }
     });
   }
 
-  nonnegative() {
+  nonnegative () {
     return this.limit({
-      description: "negative",
-      valid: num => {
+      description: 'negative',
+      valid: (num)=> {
         return num >= 0;
       }
     });

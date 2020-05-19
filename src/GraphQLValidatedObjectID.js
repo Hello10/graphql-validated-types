@@ -1,41 +1,41 @@
-const { Kind } = require("graphql/language");
+const {Kind} = require('graphql/language');
 
-const GraphQLValidatedScalar = require("./GraphQLValidatedScalar");
+const GraphQLValidatedScalar = require('./GraphQLValidatedScalar');
 
 class GraphQLValidatedObjectID extends GraphQLValidatedScalar {
-  constructor(args = {}) {
+  constructor (args = {}) {
     if (!args.name) {
-      args.name = "ObjectID";
+      args.name = 'ObjectID';
     }
     super(args);
 
-    this.validator(value => {
+    this.validator((value)=> {
       return new this.ObjectID(value);
     });
   }
 
-  get ObjectID() {
-    let ObjectID = this.constructor._ObjectID;
+  get ObjectID () {
+    const ObjectID = this.constructor._ObjectID;
     if (!ObjectID) {
-      throw new Error("ObjectID has not been set");
+      throw new Error('ObjectID has not been set');
     }
     return ObjectID;
   }
 
-  static set ObjectID(ObjectID) {
+  static set ObjectID (ObjectID) {
     this._ObjectID = ObjectID;
   }
 
-  validKinds() {
+  validKinds () {
     return [Kind.OBJECT, Kind.STRING];
   }
 
-  validTypes() {
-    return ["object", "string"];
+  validTypes () {
+    return ['object', 'string'];
   }
 
   // overriding base implementation
-  _serialize(value) {
+  _serialize (value) {
     this._ensureValidType(value);
     return value.toHexString();
   }
