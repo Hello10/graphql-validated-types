@@ -6,8 +6,8 @@ A collection of [GraphQL custom scalars](http://dev.apollodata.com/tools/graphql
 ```js
 // Holds colors like `FF00FF` and `663399`
 const HexColor = new GraphQLValidatedString({
-	name: 'HexColor',
-	description: 'HexColor string'
+  name: 'HexColor',
+  description: 'HexColor string'
 }).toUpperCase().hex().length(6).default('000000');
 ```
 
@@ -25,29 +25,29 @@ npm run example
 The base class other types extend. It is an extension of [GraphQLScalarType](https://github.com/graphql/graphql-js/blob/master/src/type/definition.js#L304) and can itself be instantiated as a custom scalar for use as a placeholder or to attach custom validators. Validators should either throw an error on invalid input, or return the the value (perhaps transformed) when it is valid. They can be chained as below and are run in the order they are added.
 ```js
 const VowelCountButNoLetterE = new GraphQLValidatedScalar({
-	name: 'VowelCountButNoLetterE'
+  name: 'VowelCountButNoLetterE'
 }).validator((value)=> {
-	if (value.match(/e/)) {
-		throw new Error('E is not allowed');
-	}
-	return value;
+  if (value.match(/e/)) {
+    throw new Error('E is not allowed');
+  }
+  return value;
 }).validator((value)=> {
-	let vowels = ['a', 'e', 'i', 'o', 'u'];
-	let count = 0;
-	for (let i = 0; i < value.length; i++) {
-		let letter = value[i];
-		if (vowels.indexOf(letter) !== -1) {
-			count++;
-		}
-	}
-	return count;
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let count = 0;
+  for (let i = 0; i < value.length; i++) {
+    let letter = value[i];
+    if (vowels.indexOf(letter) !== -1) {
+      count++;
+    }
+  }
+  return count;
 });
 
 let count = VowelCountButNoLetterE.parseValue('animals');
 Assert.equal(count, 3);
 
 Assert.throws(()=> {
-	VowelCountButNoLetterE.parseValue('forever');
+  VowelCountButNoLetterE.parseValue('forever');
 }, /E is not allowed/);
 ```
 
@@ -60,19 +60,19 @@ Validation functions will throw `TypeError` unless the value matches criteria
 Requires string to be of specified `length` (if passed number) or `min` and/or `max` (if passed object)
 ```js
 const VariableLength = new GraphQLValidatedString({
-	name: 'VariableLength'
+  name: 'VariableLength'
 }).length({min: 5, max: 10});
 
 Assert.throws(()=> {
-	VariableLength.parseValue('abcd');
+  VariableLength.parseValue('abcd');
 }, /has invalid length/);
 
 const FixedLength = new GraphQLValidatedString({
-	name: 'FixedLength'
+  name: 'FixedLength'
 }).length(8);
 
 Assert.throws(()=> {
-	FixedLength.parseValue('abcde');
+  FixedLength.parseValue('abcde');
 }, /has invalid length/);
 ```
 
@@ -80,11 +80,11 @@ Assert.throws(()=> {
 Alias for `.length({min: 1})`
 ```js
 const NotEmpty = new GraphQLValidatedString({
-	name: 'NotEmpty'
+  name: 'NotEmpty'
 }).nonempty();
 
 Assert.throws(()=> {
-	NotEmtpy.parseValue('');
+  NotEmtpy.parseValue('');
 }, /has invalid length/);
 ```
 
@@ -92,11 +92,11 @@ Assert.throws(()=> {
 Requires value to match `pattern`
 ```js
 const HumanName = new GraphQLValidatedString({
-	name: 'HumanName'
+  name: 'HumanName'
 }).regex(/([a-zA-Z]{3,30}\s*)+/);
 
 Assert.throws(()=> {
-	HumanName.parseValue('aa');
+  HumanName.parseValue('aa');
 }, /does not match/);
 ```
 
@@ -104,11 +104,11 @@ Assert.throws(()=> {
 Alias for `.regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)`
 ```js
 const Image = new GraphQLValidatedString({
-	name: 'Image'
+  name: 'Image'
 }).base64();
 
 Assert.throws(()=> {
-	Image.parseValue('=====');
+  Image.parseValue('=====');
 }, /does not match/);
 ```
 
@@ -116,11 +116,11 @@ Assert.throws(()=> {
 Alias for `.regex(/^[a-f0-9]+$/i)`
 ```js
 const Hex = new GraphQLValidatedString({
-	name: 'Hex'
+  name: 'Hex'
 }).hex();
 
 Assert.throws(()=> {
-	Hex.parseValue('=====');
+  Hex.parseValue('=====');
 }, /does not match/);
 ```
 
@@ -128,11 +128,11 @@ Assert.throws(()=> {
 Alias for `.regex(/^[a-zA-Z0-9]+$/)`
 ```js
 const Username = new GraphQLValidatedString({
-	name: 'Username'
+  name: 'Username'
 }).alphanumeric();
 
 Assert.throws(()=> {
-	Username.parseValue('!!!!!');
+  Username.parseValue('!!!!!');
 }, /does not match/);
 ```
 
@@ -140,11 +140,11 @@ Assert.throws(()=> {
 Requires value to exist in `arr`
 ```js
 const Domain = new GraphQLValidatedString({
-	name: 'Domain'
+  name: 'Domain'
 }).existsIn(['foo.com', 'bar.com']);
 
 Assert.throws(()=> {
-	Domain.parseValue('baz.com');
+  Domain.parseValue('baz.com');
 }, /not present in array/);
 ```
 
@@ -153,7 +153,7 @@ Assert.throws(()=> {
 Remove spaces from either side of string
 ```js
 const Trimmed = new GraphQLValidatedString({
-	name: 'Trimmed'
+  name: 'Trimmed'
 }).trim();
 
 Assert.equal(Trimmed.parseValue(' abc '), 'abc');
@@ -163,7 +163,7 @@ Assert.equal(Trimmed.parseValue(' abc '), 'abc');
 Replace `pattern` with `replacement`
 ```js
 const Replace = new GraphQLValidatedString({
-	name: 'Replace'
+  name: 'Replace'
 }).replace(/b+/, 'b');
 
 Assert.equal(Replace.parseValue('abbbc'), 'abc');
@@ -173,7 +173,7 @@ Assert.equal(Replace.parseValue('abbbc'), 'abc');
 Trim sides and replace repeated spaces with single space
 ```js
 const Squish = new GraphQLValidatedString({
-	name: 'Squish'
+  name: 'Squish'
 }).squish();
 
 Assert.equal(Squish.parseValue(' ab  c'), 'ab c');
@@ -183,7 +183,7 @@ Assert.equal(Squish.parseValue(' ab  c'), 'ab c');
 Limit string to maximum `length`
 ```js
 const Truncate = new GraphQLValidatedString({
-	name: 'Truncate'
+  name: 'Truncate'
 }).truncate(5);
 
 Assert.equal(Truncate.parseValue('abcdef'), 'abcde');
@@ -193,7 +193,7 @@ Assert.equal(Truncate.parseValue('abcdef'), 'abcde');
 Make string upper case
 ```js
 let Upper = new GraphQLValidatedString({
-	name: 'Upper'
+  name: 'Upper'
 }).toUpperCase();
 
 Assert.equal(Upper.parseValue('abcDEF'), 'ABCDEF');
@@ -203,7 +203,7 @@ Assert.equal(Upper.parseValue('abcDEF'), 'ABCDEF');
 Make string lower case
 ```js
 let Lower = new GraphQLValidatedString({
-	name: 'Lower'
+  name: 'Lower'
 }).toLowerCase();
 
 Assert.equal(Upper.parseValue('ABCdef'), 'abcdef');
@@ -258,11 +258,11 @@ let IPV6Address = new GraphQLValidatedIPAddress().v6();
 Require to be at least `minimum`
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).min(10);
 
 Assert.throws(()=> {
-	Count.parseValue(9);
+  Count.parseValue(9);
 }, /below minimum value/);
 ```
 
@@ -270,11 +270,11 @@ Assert.throws(()=> {
 Require to be at most `maximum`
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).max(10);
 
 Assert.throws(()=> {
-	Count.parseValue(11);
+  Count.parseValue(11);
 }, /above maximum value/);
 ```
 
@@ -282,11 +282,11 @@ Assert.throws(()=> {
 Require to be at least `minimum` and at most `maximum`
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).range([10, 20]);
 
 Assert.throws(()=> {
-	Count.parseValue(21);
+  Count.parseValue(21);
 }, /not within range/);
 ```
 
@@ -294,11 +294,11 @@ Assert.throws(()=> {
 Require to be less than `limit`
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).below(10);
 
 Assert.throws(()=> {
-	Count.parseValue(10);
+  Count.parseValue(10);
 }, /not below limit/);
 ```
 
@@ -306,11 +306,11 @@ Assert.throws(()=> {
 Require to be more than `limit`
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).above(10);
 
 Assert.throws(()=> {
-	Count.parseValue(10);
+  Count.parseValue(10);
 }, /not above limit/);
 ```
 
@@ -318,11 +318,11 @@ Assert.throws(()=> {
 Require to be more than low and less than high
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).between([10, 20]);
 
 Assert.throws(()=> {
-	Count.parseValue(10);
+  Count.parseValue(10);
 }, /not between limits/);
 ```
 
@@ -330,11 +330,11 @@ Assert.throws(()=> {
 Require number to be greater than zero
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).positive();
 
 Assert.throws(()=> {
-	Count.parseValue(0);
+  Count.parseValue(0);
 }, /not positive/);
 ```
 
@@ -342,11 +342,11 @@ Assert.throws(()=> {
 Require number to be less than zero
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).negative();
 
 Assert.throws(()=> {
-	Count.parseValue(0);
+  Count.parseValue(0);
 }, /not negative/);
 ```
 
@@ -354,11 +354,11 @@ Assert.throws(()=> {
 Require number to be zero or greater
 ```js
 let Count = new GraphQLValidatedNumber({
-	name: 'Count'
+  name: 'Count'
 }).nonnegative();
 
 Assert.throws(()=> {
-	Count.parseValue(-1);
+  Count.parseValue(-1);
 }, /negative/);
 ```
 
@@ -367,7 +367,7 @@ Extends `GraphQLValidatedNumber` and requires number to be `32-bit` (between `-2
 
 ```js
 const Integer = new GraphQLValidatedInteger({
-	name: 'Integer'
+  name: 'Integer'
 });
 
 Assert.equal(Integer.parseValue(10.5), 10);
@@ -392,7 +392,7 @@ By default, uses Moment's [parsing](https://momentjs.com/docs/#/parsing/) logic 
 ```js
 
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 });
 const now = new Date();
 Assert.equal(Time.parseValue(now).valueOf(), now.getTime());
@@ -402,7 +402,7 @@ Assert.equal(Time.parseValue(now).valueOf(), now.getTime());
 Specifies custom input `format`
 ```js
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).inputFormat('YYYY-MM-DD HH:mm Z');
 let formatted = Time.parseValue('2010-10-20 4:30 +0000').format();
 Assert.equal(formatted, '2010-10-19T21:30:00-07:00');
@@ -414,7 +414,7 @@ Specifies custom output `format` for serialization
 const year = '2013';
 const time = `${year}-02-08`;
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).outputFormat('YYYY');
 const output = Time.serialize(Time.parseValue(time));
 Assert.equal(output, year);
@@ -429,11 +429,11 @@ const tomorrow = Moment().add({day: 1});
 const next_day = tomorrow.clone().add({day: 1});
 
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).before(tomorrow);
 
 Assert.throws(()=> {
-	Time.parseValue(next_day);
+  Time.parseValue(next_day);
 }, /not before/);
 ```
 
@@ -441,12 +441,12 @@ Assert.throws(()=> {
 Requires date to be before now
 ```js
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).beforeNow();
 
 const tomorrow = Moment().add({day: 1});
 Assert.throws(()=> {
-	Time.parseValue(tomorrow);
+  Time.parseValue(tomorrow);
 }, /not before/);
 ```
 
@@ -457,11 +457,11 @@ const tomorrow = Moment().add({day: 1});
 const next_day = tomorrow.clone().add({day: 1});
 
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).after(next_day);
 
 Assert.throws(()=> {
-	Time.parseValue(tomorrow);
+  Time.parseValue(tomorrow);
 }, /not after/);
 ```
 
@@ -469,12 +469,12 @@ Assert.throws(()=> {
 Requires date to be before now
 ```js
 const Time = new GraphQLValidatedMoment({
-	name: 'Time'
+  name: 'Time'
 }).afterNow();
 
 const yesterday = Moment().subtract({day: 1});
 Assert.throws(()=> {
-	Time.parseValue(yesterday);
+  Time.parseValue(yesterday);
 }, /not after/);
 ```
 

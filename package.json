@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "example": "yarn && cd example && yarn && yarn start",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src ./example/src",
     "test": "yarn nyc mocha --ui bdd './src/**/*.test.js'"
   },
   "author": {
