@@ -28,6 +28,7 @@ const typeDefs = `
     post(id: UUID!): Post
     authors: [Author]
     author(id: UUID!): Author
+    version: String!
   }
 
   type Mutation {

@@ -1,8 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const {graphqlExpress} = require('apollo-server-express');
+const {ApolloServer} = require('apollo-server-express');
 const {makeExecutableSchema} = require('graphql-tools');
-const expressPlayground = require('graphql-playground-middleware-express').default;
 
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
@@ -32,12 +30,14 @@ printCollection({name: 'Posts', list: FAKE_POSTS});
 const {PORT} = process.env;
 
 const app = express();
-const json = bodyParser.json();
-const graphql = graphqlExpress({schema});
-const playground = expressPlayground({endpoint: '/graphql'});
+const server = new ApolloServer({
+  schema,
+  playground: {
+    endpoint: '/graphql'
+  }
+});
 
-app.use('/graphql', json, graphql);
-app.get('/playground', playground);
+server.applyMiddleware({app});
 app.listen(PORT);
 
 console.log(`Running /graphql and /playground on port ${PORT}`);

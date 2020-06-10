@@ -47,6 +47,9 @@ const resolvers = {
     },
     author (_, {id}) {
       return Author.findOne({id});
+    },
+    version () {
+      return '1.0.0';
     }
   },
   Mutation: {
