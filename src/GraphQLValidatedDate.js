@@ -12,10 +12,13 @@ class GraphQLValidatedDate extends GraphQLValidatedScalar {
     this.validator((value)=> {
       switch (typeof value) {
         case 'object':
-          if (value.constructor !== Date) {
-            throw new TypeError(`${this.name} is not object of type Date`);
+          if (value && value.toDate && (value.toDate.constructor === Function)) {
+            return value.toDate();
+          } else if (value.constructor !== Date) {
+            throw new TypeError(`GraphQLValidatedDate ${this.name} is not object of type Date`);
+          } else {
+            return value;
           }
-          return value;
         case 'number':
         case 'string':
           return new Date(value);

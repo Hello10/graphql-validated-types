@@ -37,4 +37,14 @@ describe('GraphQLValidatedDate', ()=> {
     const time = new Date().toString();
     jsonEquals(Date_.parseValue(time), new Date(time));
   });
+
+  it('should handle object with toDate defined', ()=> {
+    const time = {
+      date: new Date(),
+      toDate () {
+        return this.date;
+      }
+    };
+    jsonEquals(Date_.parseValue(time), time.date);
+  });
 });
