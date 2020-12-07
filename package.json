@@ -1,12 +1,13 @@
 {
   "name": "graphql-validated-types",
-  "version": "2.9.1",
+  "version": "2.10.0",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
     "example": "yarn && cd example && yarn && yarn start",
     "lint": "eslint ./src ./example/src",
-    "test": "yarn nyc mocha --ui bdd './src/**/*.test.js'"
+    "test": "yarn nyc mocha --ui bdd './src/**/*.test.js'",
+    "clean": "rm -rf ./node_modules && rm -f yarn.lock"
   },
   "author": {
     "name": "Stephen Handley",
@@ -14,26 +15,26 @@
     "url": "https://hello10.com"
   },
   "license": "MIT",
+  "dependencies": {
+    "email-regex": "4.0.0",
+    "graphql": "^15.4.0",
+    "ip-regex": "4.2.0",
+    "phone-regex": "2.1.0",
+    "regex-username": "2.0.0",
+    "semver-regex": "3.1.1",
+    "url-regex": "5.0.0"
+  },
   "devDependencies": {
     "@hello10/eslint-config": "1.0.2",
     "babel-eslint": "10.1.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-plugin-import": "2.20.2",
+    "eslint": "7.15.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.22.1",
     "eslint-plugin-promise": "4.2.1",
-    "mocha": "7.1.2",
-    "moment": "2.24.0",
-    "mongodb": "3.2.7",
-    "nyc": "15.0.1"
-  },
-  "dependencies": {
-    "email-regex": "4.0.0",
-    "graphql": "^14.4.2",
-    "ip-regex": "4.1.0",
-    "phone-regex": "2.1.0",
-    "regex-username": "2.0.0",
-    "semver-regex": "3.1.0",
-    "url-regex": "5.0.0"
+    "mocha": "8.2.1",
+    "moment": "2.29.1",
+    "mongodb": "3.6.3",
+    "nyc": "15.1.0"
   },
   "repository": {
     "type": "git",
