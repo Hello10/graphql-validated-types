@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "2.14.3",
+    "apollo-server-express": "2.19.0",
     "express": "4.17.1",
-    "graphql-tools": "6.0.9",
-    "moment": "2.26.0",
-    "uuid": "8.1.0"
+    "graphql-tools": "7.0.2",
+    "moment": "2.29.1",
+    "uuid": "8.3.1"
   }
 }

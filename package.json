@@ -1,6 +1,6 @@
 {
   "name": "graphql-validated-types",
-  "version": "2.10.0",
+  "version": "2.11.0",
   "description": "A collection of GraphQL custom scalars supporting cleanup, validation, and defaults via fluent api",
   "main": "index.js",
   "scripts": {
@@ -17,12 +17,12 @@
   "license": "MIT",
   "dependencies": {
     "email-regex": "4.0.0",
-    "graphql": "^15.4.0",
+    "graphql": "^14.0.0",
     "ip-regex": "4.2.0",
     "phone-regex": "2.1.0",
     "regex-username": "2.0.0",
     "semver-regex": "3.1.1",
-    "url-regex": "5.0.0"
+    "url-regex-safe": "1.0.2"
   },
   "devDependencies": {
     "@hello10/eslint-config": "1.0.2",
